@@ -37,3 +37,38 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+#Modelo para perguntas
+class ProductQuestion(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    question = models.TextField()
+    STATUS_CHOICES = (
+        ('Active', 'Active'),
+        ('Inactive', 'Inactive'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Active")
+
+    class Meta:
+        verbose_name_plural = "Product Questions"
+
+    def __str__(self):
+        return self.question
+
+#Modelo para respostas
+class ProductAnswer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    product_question = models.ForeignKey(ProductQuestion, on_delete=models.CASCADE)
+    answer = models.TextField()
+    STATUS_CHOICES = (
+        ('Active', 'Active'),
+        ('Inactive', 'Inactive'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Active")
+
+    class Meta:
+        verbose_name_plural = "Answers"
+
+    def __str__(self):
+        return self.answer
+
