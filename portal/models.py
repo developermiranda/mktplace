@@ -9,3 +9,7 @@ class Category(models.Model):
   order = models.IntegerField(null=True, blank=True)
   hidden = models.BooleanField(default=False)
 
+  class Meta:
+      verbose_name_plural = 'Categories'
+  def __str__(self):
+        return self.name
